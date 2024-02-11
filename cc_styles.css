@@ -28,7 +28,7 @@ body {
 }
 
 .radius-button.selected {
-    background-color: #3498db;
+    background-color: #377EE7;
     color: #fff;
 }
 
@@ -83,7 +83,7 @@ input[type="range"] {
 }
 
 input:checked + .slider {
-    background-color: #3498db;
+    background-color: #377EE7;
 }
 
 input:checked + .slider:before {
@@ -111,7 +111,7 @@ input[type="date"] {
 }
 
 button {
-    background-color: #3498db;
+    background-color: #377EE7;
     color: #fff;
     padding: 10px;
     border: none;
