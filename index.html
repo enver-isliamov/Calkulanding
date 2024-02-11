@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Заявка на услугу</title>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons-container">
+            <!-- Кнопки Radius -->
+            <button id="R13" class="radius-button" onclick="selectRadius(this)">R13</button>
+            <button id="R14" class="radius-button" onclick="selectRadius(this)">R14</button>
+            <button id="R15" class="radius-button" onclick="selectRadius(this)">R15</button>
+            <button id="R16" class="radius-button" onclick="selectRadius(this)">R16</button>
+            <button id="R17" class="radius-button" onclick="selectRadius(this)">R17</button>
+            <button id="R18" class="radius-button" onclick="selectRadius(this)">R18</button>
+            <button id="R19" class="radius-button" onclick="selectRadius(this)">R19</button>
+            <button id="R20" class="radius-button" onclick="selectRadius(this)">R20</button>
+            <button id="R21" class="radius-button" onclick="selectRadius(this)">R21</button>
+            <button id="R22" class="radius-button" onclick="selectRadius(this)">R22</button>
+        </div>
+        <div class="sliders-container">
+            <!-- Слайдеры -->
+            <label for="srokSlider">Срок хранения:</label>
+            <input type="range" id="srokSlider" min="1" max="8" value="3" oninput="updateSrokValue()">
+            <span id="srokValue">3 мес.</span>
+
+            <label for="kolSlider">Количество шин:</label>
+            <input type="range" id="kolSlider" min="1" max="8" value="4" oninput="updateKolValue()">
+            <span id="kolValue">4 шт</span>
+
+            <!-- Тумблер -->
+            <label>С диском:</label>
+            <label class="switch">
+                <input type="checkbox" id="diskToggle" onchange="updateDiskValue()">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="result-container">
+            <!-- Результаты вычислений -->
+            <label for="summa">Цена за хранение:</label>
+            <input type="text" id="summa" readonly>
+
+            <!-- Дополнительные поля -->
+            <label for="phone">Телефон:</label>
+            <input type="text" id="phone" required>
+
+            <label for="name">Имя:</label>
+            <input type="text" id="name">
+
+            <label for="date">Дата встречи:</label>
+            <input type="date" id="date">
+
+            <label for="address">Адрес вывоза:</label>
+            <input type="text" id="address">
+
+            <!-- Кнопка "Заказать услугу" -->
+            <button onclick="submitForm()">Заказать услугу</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
