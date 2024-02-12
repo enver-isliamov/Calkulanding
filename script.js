@@ -32,7 +32,7 @@ function updateKolValue() {
 
 // Функция обновления значения тумблера "С диском"
 function updateDiskValue() {
-    diskValue = document.getElementById('diskToggle').checked ? 2 : 1;
+    diskValue = document.getElementById('diskToggle').checked ? 1.2 : 1;
     updateSumma();
 }
 
