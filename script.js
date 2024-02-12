@@ -1,89 +1,111 @@
-// Инициализация переменных
-let selectedRadius = "R13";
-let srokValue = 3;
-let kolValue = 4;
-let diskValue = 1;
+document.addEventListener('DOMContentLoaded', function () {
+    const radiusButtons = document.querySelectorAll('.radius-button');
+    const srokSlider = document.getElementById('srokSlider');
+    const kolSlider = document.getElementById('kolSlider');
+    const diskToggle = document.getElementById('diskToggle');
+    const summaValue = document.getElementById('summaValue');
+    const dateInput = document.getElementById('dateInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const nameInput = document.getElementById('nameInput');
+    const addressInput = document.getElementById('addressInput');
+    const submitBtn = document.getElementById('submitBtn');
 
-// Функция выбора радиуса
-function selectRadius(radius, button) {
-    // Сброс стилей у предыдущей выбранной кнопки
-    document.querySelector('.radius-button.selected').classList.remove('selected');
+    let selectedRadius = 125;
+    let selectedSrok = 3;
+    let selectedKol = 4;
+    let isDiskEnabled = false;
 
-    // Обновление переменных и стилей для новой выбранной кнопки
-    selectedRadius = button.id;
-    button.classList.add('selected');
-    updateSumma();
-}
-
-
-// Функция обновления значения срока хранения
-function updateSrokValue() {
-    srokValue = document.getElementById('srokSlider').value;
-    document.getElementById('srokValue').textContent = `${srokValue} мес.`;
-    updateSumma();
-}
-
-// Функция обновления значения количества шин
-function updateKolValue() {
-    kolValue = document.getElementById('kolSlider').value;
-    document.getElementById('kolValue').textContent = `${kolValue} шт`;
-    updateSumma();
-}
-
-// Функция обновления значения тумблера "С диском"
-function updateDiskValue() {
-    diskValue = document.getElementById('diskToggle').checked ? 1.2 : 1;
-    updateSumma();
-}
-
-// Функция обновления значения цены за хранение
-function updateSumma() {
-    const radiusValue = parseFloat(selectedRadius.slice(1)); // Преобразование строки "Rxx" в число
-    const summa = Math.round(radiusValue * kolValue * srokValue * diskValue);
-    document.getElementById('summa').value = `${summa} руб.`;
-}
-
-// Функция отправки формы
-function submitForm() {
-    // Собираем данные пользователя
-    const formData = {
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        tires: selectedRadius,
-        quantity: kolValue,
-        storagePeriod: `${srokValue} мес.`,
-        meetingDate: document.getElementById('date').value,
-        address: document.getElementById('address').value
-    };
-
-     // Отправляем заявку в Телеграм бот
-    const telegramBotToken = "6473374979:AAH8OHCxWN2kO0ep9wrbLXolk2ys4__GLqg"; // Замените на реальный токен вашего бота
-    const chatId = "+79780703665"; // Замените на реальный ID вашего чата
-
-    const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
-
-    const axiosConfig = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-    const message = `Имя: ${formData.name}\nТелефон: ${formData.phone}\nШины: ${formData.tires}\nКол-во: ${formData.quantity}шт\nСрок хранения: ${formData.storagePeriod}\nДата встречи: ${formData.meetingDate}\nАдрес вывоза: ${formData.address}`;
-
-    // Формируем данные для отправки
-    const requestData = {
-        chat_id: chatId,
-        text: message
-    };
-
-    // Отправка сообщения в Телеграм бот с использованием axios
-    axios.post(telegramApiUrl, requestData, axiosConfig)
-        .then(response => {
-            console.log("Заявка успешно отправлена в Телеграм бот:", response.data);
-            // Дополнительные действия при успешной отправке (перенаправление, показ сообщения и т.д.)
-        })
-        .catch(error => {
-            console.error("Ошибка при отправке заявки в Телеграм бот:", error);
-            // Обработка ошибок при отправке (показ сообщения об ошибке, логирование и т.д.)
+    // Обработчик для кнопок с переменными Radius
+    radiusButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectedRadius = parseInt(button.dataset.radius);
+            updateSumma();
+            updateButtonStates();
         });
-}
+    });
+
+    // Обработчик для слайдера Срока хранения
+    srokSlider.addEventListener('input', () => {
+        selectedSrok = parseInt(srokSlider.value);
+        updateSumma();
+        updateSrokValue();
+    });
+
+    // Обработчик для слайдера Количества шин
+    kolSlider.addEventListener('input', () => {
+        selectedKol = parseInt(kolSlider.value);
+        updateSumma();
+        updateKolValue();
+    });
+
+    // Обработчик для тумблера "С диском"
+    diskToggle.addEventListener('change', () => {
+        isDiskEnabled = diskToggle.checked;
+        updateSumma();
+    });
+
+    // Обработчик для кнопки "Заказать услугу"
+    submitBtn.addEventListener('click', () => {
+        sendOrder();
+    });
+
+    // Функция для обновления значения переменной Summa и вывода на страницу
+    function updateSumma() {
+        const result = selectedRadius * selectedKol * selectedSrok * (isDiskEnabled ? 2 : 1);
+        summaValue.textContent = result.toFixed(0);
+    }
+
+    // Функция для обновления значения переменной Srok и вывода на страницу
+    function updateSrokValue() {
+        document.getElementById('srokValue').textContent = selectedSrok;
+    }
+
+    // Функция для обновления значения переменной Kol и вывода на страницу
+    function updateKolValue() {
+        document.getElementById('kolValue').textContent = selectedKol;
+    }
+
+    // Функция для подсветки активной кнопки и обновления состояний кнопок
+    function updateButtonStates() {
+        radiusButtons.forEach(button => {
+            const radiusValue = parseInt(button.dataset.radius);
+            button.classList.toggle('active', radiusValue === selectedRadius);
+        });
+    }
+
+    // Функция для отправки заявки
+    async function sendOrder() {
+        const orderDetails = `
+            Новая Заявка
+            Имя: ${nameInput.value}
+            Телефон: ${phoneInput.value}
+            Шины: R${selectedRadius}
+            Кол-во: ${selectedKol} шт.
+            Срок хранения: ${selectedSrok} мес.
+            Дата встречи: ${dateInput.value}
+            Адрес вывоза: ${addressInput.value}
+        `;
+
+        // Ваш токен бота и ID чата получателя
+        const botToken = '6473374979:AAH8OHCxWN2kO0ep9wrbLXolk2ys4__GLqg';
+        const chatId = '96609347';
+
+        // Формируем URL для отправки сообщения через API Телеграма
+        const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        const telegramApiParams = {
+            chat_id: chatId,
+            text: orderDetails,
+        };
+
+        try {
+            // Отправляем запрос к API Телеграма
+            await axios.post(telegramApiUrl, telegramApiParams);
+
+            // Опционально: обновляем UI или выводим сообщение об успешной отправке
+            console.log('Заявка успешно отправлена в Телеграм!');
+        } catch (error) {
+            // Обработка ошибок, например, вывод в консоль
+            console.error('Ошибка при отправке заявки в Телеграм:', error);
+        }
+    }
+});
