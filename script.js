@@ -77,15 +77,16 @@ document.addEventListener('DOMContentLoaded', function () {
     async function sendOrder() {
         const orderDetails = `
         📌 **НОВАЯ ЗАЯВКА**
+        
             Имя: ${nameInput.value}
-           ● Телефон: ${phoneInput.value}
+            ● Телефон: ${phoneInput.value}
             Дата встречи: ${dateInput.value}
-           ● Адрес вывоза: ${addressInput.value}
+            ● Адрес вывоза: ${addressInput.value}
             
             Размер шин: R${selectedRadius} 
-            С дисками: ${isDiskEnabled} 
+            ● С дисками: ${isDiskEnabled} 
             Количествово: ${selectedKol} шт.
-            Срок хранения: ${selectedSrok} мес.
+            ● Срок хранения: ${selectedSrok} мес.
 
         `;
 
