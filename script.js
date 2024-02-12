@@ -73,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Найти кнопку "Заказать услугу" по её id или другому селектору
+const orderButton = document.getElementById('orderButton');
+
+// Добавить обработчик события на нажатие кнопки
+orderButton.addEventListener('click', async function () {
     // Проверяем, указан ли номер телефона
     if (!phoneInput.value) {
         alert('Пожалуйста, укажите номер телефона.');
