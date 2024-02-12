@@ -3,62 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cc_styles.css">
-    <title>Заявка на услугу</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Заказ услуги</title>
 </head>
 <body>
     <div class="container">
         <div class="buttons-container">
-            <!-- Кнопки Radius -->
-<button id="R13" class="radius-button" onclick="selectRadius(125, this)">R13</button>
-<button id="R14" class="radius-button" onclick="selectRadius(125, this)">R14</button>
-            <button id="R15" class="radius-button" onclick="selectRadius(150, 'R15')">R15</button>
-            <button id="R16" class="radius-button" onclick="selectRadius(150, 'R16')">R16</button>
-            <button id="R17" class="radius-button" onclick="selectRadius(200, 'R17')">R17</button>
-            <button id="R18" class="radius-button" onclick="selectRadius(200, 'R18')">R18</button>
-            <button id="R19" class="radius-button" onclick="selectRadius(225, 'R19')">R19</button>
-            <button id="R20" class="radius-button" onclick="selectRadius(225, 'R20')">R20</button>
-            <button id="R21" class="radius-button" onclick="selectRadius(250, 'R21')">R21</button>
-            <button id="R22" class="radius-button" onclick="selectRadius(250, 'R22')">R22</button>
+            <!-- Кнопки с переменными Radius -->
+            <button class="radius-button" data-radius="124,999999">R13</button>
+            <button class="radius-button" data-radius="125">R14</button>
+            <button class="radius-button" data-radius="150">R15</button>
+            <button class="radius-button" data-radius="151">R16</button>
+            <button class="radius-button" data-radius="200">R17</button>
+            <button class="radius-button" data-radius="200">R18</button>
+            <button class="radius-button" data-radius="250">R19</button>
+            <button class="radius-button" data-radius="250">R20</button>
+            <button class="radius-button" data-radius="275">R21</button>
+            <button class="radius-button" data-radius="275">R22</button>
         </div>
-        <div class="sliders-container">
-            <!-- Слайдеры -->
-            <label for="srokSlider">Срок хранения:</label>
-            <input type="range" id="srokSlider" min="1" max="8" value="3" oninput="updateSrokValue()">
-            <span id="srokValue">3 мес.</span>
-
-            <label for="kolSlider">Количество шин:</label>
-            <input type="range" id="kolSlider" min="1" max="8" value="4" oninput="updateKolValue()">
-            <span id="kolValue">4 шт</span>
-
-            <!-- Тумблер -->
-            <label>С диском:</label>
-            <label class="switch">
-                <input type="checkbox" id="diskToggle" onchange="updateDiskValue()">
-                <span class="slider"></span>
-            </label>
+        
+        <!-- Рендж слайдер для Срока хранения -->
+        <label for="srokSlider">Срок хранения: <span id="srokValue">3</span> мес.</label>
+        <input type="range" id="srokSlider" min="1" max="8" value="3">
+        
+        <!-- Рендж слайдер для Количества шин -->
+        <label for="kolSlider">Количество шин: <span id="kolValue">4</span> шт.</label>
+        <input type="range" id="kolSlider" min="1" max="8" value="4">
+        
+        <!-- Тумблер "С диском" -->
+        <label for="diskToggle">С диском</label>
+        <input type="checkbox" id="diskToggle">
+        
+        <!-- Строка с названием "Цена за хранение" -->
+        <div class="price-container">
+            <p>Цена за хранение: <span id="summaValue">0</span> руб.</p>
         </div>
-        <div class="result-container">
-            <!-- Результаты вычислений -->
-            <label for="summa">Цена за хранение:</label> <input type="text" id="summa" readonly>
-
-            <!-- Дополнительные поля -->
-            <label for="phone">Телефон:</label>
-            <input type="text" id="phone" required>
-
-            <label for="name">Имя:</label>
-            <input type="text" id="name">
-
-            <label for="date">Дата встречи:</label>
-            <input type="date" id="date">
-
-            <label for="address">Адрес вывоза:</label>
-            <input type="text" id="address">
-
-            <!-- Кнопка "Заказать услугу" -->
-            <button onclick="submitForm()">Заказать услугу</button>
-        </div>
+        
+        <!-- Дополнительные поля -->
+        <label for="dateInput">Дата встречи:</label>
+        <input type="date" id="dateInput">
+        
+        <label for="phoneInput">Телефон:</label>
+        <input type="tel" id="phoneInput" required>
+        
+        <label for="nameInput">Имя:</label>
+        <input type="text" id="nameInput">
+        
+        <label for="addressInput">Адрес вывоза:</label>
+        <input type="text" id="addressInput">
+        
+        <!-- Кнопка "Заказать услугу" -->
+        <button id="submitBtn">Заказать услугу</button>
     </div>
+
     <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </body>
 </html>
