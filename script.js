@@ -98,8 +98,12 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            // Отправляем запрос к API Телеграма
-            await axios.post(telegramApiUrl, telegramApiParams);
+try {
+    // Отправляем запрос к API Телеграма
+    await axios.post(telegramApiUrl, telegramApiParams);
+} catch (error) {
+    console.error('Ошибка при отправке заявки:', error);
+}
 
             // Опционально: обновляем UI или выводим сообщение об успешной отправке
             console.log('Заявка успешно отправлена в Телеграм!');
