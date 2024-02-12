@@ -10,10 +10,11 @@ body {
 
 .container {
     text-align: center;
-        background-color: #fff;
+    background-color: #fff;
     padding: 20px;
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     margin-bottom: 80px;
 }
 
 .buttons-container {
