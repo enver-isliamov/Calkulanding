@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Функция для отправки заявки
     async function sendOrder() {
         const orderDetails = `
-           ❗*Новая Заявка*
+           *Новая Заявка*
             Имя: ${nameInput.value}
             Телефон: `${phoneInput.value}`
             Шины: R${selectedRadius}
