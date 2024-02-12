@@ -82,7 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
             Дата встречи: ${dateInput.value}
             Адрес вывоза: ${addressInput.value}
             
-            Размер шин: R${selectedRadius}
+            Размер шин: R${selectedRadius} 
+            С дисками: ${isDiskEnabled}
             Количествово: ${selectedKol} шт.
             Срок хранения: ${selectedSrok} мес.
 
