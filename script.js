@@ -73,6 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Проверяем, указан ли номер телефона
+    if (!phoneInput.value) {
+        alert('Пожалуйста, укажите номер телефона.');
+        return; // Прекращаем выполнение функции, если номер телефона не указан
+    }
+    
    // Функция для отправки заявки
     async function sendOrder() {
         const orderDetails = `
