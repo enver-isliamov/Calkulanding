@@ -79,11 +79,13 @@ document.addEventListener('DOMContentLoaded', function () {
         ●*НОВАЯ ЗАЯВКА*●
             Имя: ${nameInput.value}
             Телефон: ${phoneInput.value}
+            Дата встречи: ${dateInput.value}
+            Адрес вывоза: ${addressInput.value}
+            
             Размер шин: R${selectedRadius}
             Количествово: ${selectedKol} шт.
-            Дата встречи: ${dateInput.value}
             Срок хранения: ${selectedSrok} мес.
-            Адрес вывоза: ${addressInput.value}
+
         `;
 
         // Ваш токен бота и ID чата получателя
