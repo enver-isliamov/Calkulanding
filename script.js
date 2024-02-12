@@ -95,7 +95,7 @@ async function sendOrder() {
             
 ●Колёса: R${selectedRadius}  ➽  ${selectedKol}шт.  ➽  ${isDiskEnabled} (диски)
             ● Срок хранения: ${selectedSrok}мес.
-               .....................
+ ............................................
 
         `;
 
