@@ -73,17 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Найти кнопку "Заказать услугу" по её id или другому селектору
-const orderButton = document.getElementById('sendOrder');
-
-// Добавить обработчик события на нажатие кнопки
-orderButton.addEventListener('click', async function () {
-    // Проверяем, указан ли номер телефона
-    if (!phoneInput.value) {
-        alert('Пожалуйста, укажите номер телефона.');
-        return; // Прекращаем выполнение функции, если номер телефона не указан
-    }
-    
+     
    // Функция для отправки заявки
     async function sendOrder() {
         const orderDetails = `
@@ -96,6 +86,7 @@ orderButton.addEventListener('click', async function () {
             
 ●Колёса: R${selectedRadius}  ➽  ${selectedKol}шт.  ➽  ${isDiskEnabled} (диски)
             ● Срок хранения: ${selectedSrok}мес.
+               .....................
 
         `;
 
