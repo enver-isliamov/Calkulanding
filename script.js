@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Функция для обновления значения переменной Summa и вывода на страницу
     function updateSumma() {
-        const result = selectedRadius * selectedKol * selectedSrok * (isDiskEnabled ? 2 : 1);
+        const result = selectedRadius * selectedKol * selectedSrok * (isDiskEnabled ? 1.2 : 1);
         summaValue.textContent = result.toFixed(0);
     }
 
@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
    // Функция для отправки заявки
     async function sendOrder() {
         const orderDetails = `
-        ● **НОВАЯ ЗАЯВКА** ●
+        📌 **НОВАЯ ЗАЯВКА**
             Имя: ${nameInput.value}
-            Телефон: ${phoneInput.value}
+           ● Телефон: ${phoneInput.value}
             Дата встречи: ${dateInput.value}
-            Адрес вывоза: ${addressInput.value}
+           ● Адрес вывоза: ${addressInput.value}
             
             Размер шин: R${selectedRadius} 
-            С дисками: ${isDiskEnabled}
+            С дисками: ${isDiskEnabled} 
             Количествово: ${selectedKol} шт.
             Срок хранения: ${selectedSrok} мес.
 
