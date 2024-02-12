@@ -19,9 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     radiusButtons.forEach(button => {
         button.addEventListener('click', () => {
             selectedRadius = parseInt(button.dataset.radius);
-            selectedButtonLabel = button.textContent.trim(); // Обновляем название кнопки
             updateSumma();
-            updateButtonStates();
+            updateButtonStates(button);
         });
     });
 
@@ -44,7 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
         isDiskEnabled = diskToggle.checked;
         updateSumma();
     });
-   
+
+    // Обработчик для кнопки "Заказать услугу"
+    submitBtn.addEventListener('click', () => {
+        sendOrder();
+    });
+
     // Функция для обновления значения переменной Summa и вывода на страницу
     function updateSumma() {
         const result = selectedRadius * selectedKol * selectedSrok * (isDiskEnabled ? 1.2 : 1);
@@ -74,27 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-   // Обработчик для кнопки "Заказать услугу"
-    submitBtn.addEventListener('click', () => {
-        // Проверяем, указан ли номер телефона
-        if (!phoneInput.value.trim()) {
-            alert('Пожалуйста, укажите номер телефона!');
-            return; // Прекращаем выполнение функции, если номер телефона не указан
-        }
-
-        // Отправляем заявку
-        sendOrder();
-
-        // После отправки заявки выводим всплывающее уведомление
-        const isConfirmed = window.confirm('Заявка отправлена. Менеджер свяжется с вами!');
-        if (isConfirmed) {
-            // Можно добавить дополнительные действия после подтверждения
-        }
-    });
-
-  
 //////////////////////////////////////////////////////////////////////
-    
     
     // Функция для отправки заявки
     async function sendOrder() {
