@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Найти кнопку "Заказать услугу" по её id или другому селектору
-const orderButton = document.getElementById('orderButton');
+const orderButton = document.getElementById('sendOrder');
 
 // Добавить обработчик события на нажатие кнопки
 orderButton.addEventListener('click', async function () {
