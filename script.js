@@ -79,14 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
         📌 НОВАЯ ЗАЯВКА
         
             Имя: ${nameInput.value}
-            Телефон: ` ${phoneInput.value} `
+                Телефон: ` ${phoneInput.value} `
            ● Дата встречи: ${dateInput.value} 👈
             Адрес вывоза: ${addressInput.value}
             
-            Размер шин: R${selectedRadius} 
-            ● С дисками: ${isDiskEnabled} 
-            Количествово: ${selectedKol} шт.
-            ● Срок хранения: ${selectedSrok} мес.
+            Колёса: R${radiusButtons}   ➽   ${selectedKol} шт.   ➽   ${isDiskEnabled} (диски)
+                        ● Срок хранения: ${selectedSrok} мес.
 
         `;
 
