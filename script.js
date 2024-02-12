@@ -72,7 +72,16 @@ document.addEventListener('DOMContentLoaded', function () {
             button.classList.toggle('active', radiusValue === selectedRadius);
         });
     }
-
+    
+//////////////////////////////////////////////////////////////////////
+    
+    // Функция для отправки заявки
+async function sendOrder() {
+    // Проверяем, указан ли номер телефона
+    if (!phoneInput.value.trim()) {
+        alert('Пожалуйста, укажите номер телефона!');
+        return; // Прекращаем выполнение функции, если номер телефона не указан
+    }
      
    // Функция для отправки заявки
     async function sendOrder() {
