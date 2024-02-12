@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let selectedKol = 4;
     let isDiskEnabled = false;
 
-    // Обработчик для кнопок с переменными Radius
+     // Обработчик для кнопок с переменными Radius
     radiusButtons.forEach(button => {
         button.addEventListener('click', () => {
             selectedRadius = parseInt(button.dataset.radius);
+            selectedButtonLabel = button.textContent.trim(); // Обновляем название кнопки
             updateSumma();
             updateButtonStates();
         });
@@ -91,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ● Дата встречи: ${dateInput.value} 👈
             Адрес вывоза: ${addressInput.value}
             
-             ● Колёса: R${selectedRadius}  ➽  ${selectedKol}шт.  ➽  ${isDiskEnabled ? 'С дисками' : 'Без дисков'} 
+            ● Колёса: ${selectedButtonLabel}  ➽  ${selectedKol}шт.  ➽  ${isDiskEnabled ? 'С дисками' : 'Без дисков'} 
             ● Срок хранения: ${selectedSrok}мес.
             ............................................
         `;
