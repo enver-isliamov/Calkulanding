@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
         📌 НОВАЯ ЗАЯВКА
         
             Имя: ${nameInput.value}
-                Телефон: ` ${phoneInput.value} `
+                Телефон: ${phoneInput.value}
            ● Дата встречи: ${dateInput.value} 👈
             Адрес вывоза: ${addressInput.value}
             
