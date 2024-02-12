@@ -19,9 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     radiusButtons.forEach(button => {
         button.addEventListener('click', () => {
             selectedRadius = parseInt(button.dataset.radius);
-            selectedButtonLabel = button.textContent.trim(); // Обновляем название кнопки
             updateSumma();
-            updateButtonStates();
+            updateButtonStates(button);
         });
     });
 
@@ -66,11 +65,16 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('kolValue').textContent = selectedKol;
     }
 
-    // Функция для подсветки активной кнопки и обновления состояний кнопок
-    function updateButtonStates() {
+   // Функция для подсветки активной кнопки и обновления состояний кнопок
+    function updateButtonStates(selectedButton) {
         radiusButtons.forEach(button => {
             const radiusValue = parseInt(button.dataset.radius);
-            button.classList.toggle('active', radiusValue === selectedRadius);
+            const isActive = button === selectedButton;
+            button.classList.toggle('active', isActive);
+
+            if (isActive) {
+                selectedButtonLabel = button.textContent.trim();
+            }
         });
     }
     
