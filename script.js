@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', function () {
    // Функция для отправки заявки
     async function sendOrder() {
         const orderDetails = `
-        📌 **НОВАЯ ЗАЯВКА**
+        📌 НОВАЯ ЗАЯВКА
         
             Имя: ${nameInput.value}
-            ● Телефон: ${phoneInput.value}
-            Дата встречи: ${dateInput.value}
-            ● Адрес вывоза: ${addressInput.value}
+            Телефон: ` ${phoneInput.value} `
+           ● Дата встречи: ${dateInput.value} 👈
+            Адрес вывоза: ${addressInput.value}
             
             Размер шин: R${selectedRadius} 
             ● С дисками: ${isDiskEnabled} 
