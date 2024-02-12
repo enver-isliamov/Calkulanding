@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
            ● Дата встречи: ${dateInput.value} 👈
             Адрес вывоза: ${addressInput.value}
             
-            Колёса: R${selectedRadius}   ➽   ${selectedKol} шт.   ➽   ${isDiskEnabled} (диски)
-            ● Срок хранения: ${selectedSrok} мес.
+●Колёса: R${selectedRadius}  ➽  ${selectedKol}шт.  ➽  ${isDiskEnabled} (диски)
+            ● Срок хранения: ${selectedSrok}мес.
 
         `;
 
