@@ -5,7 +5,7 @@ let kolValue = 4;
 let diskValue = 1;
 
 // Функция выбора радиуса
-function selectRadius(button) {
+function selectRadius(radius, button) {
     // Сброс стилей у предыдущей выбранной кнопки
     document.querySelector('.radius-button.selected').classList.remove('selected');
 
@@ -14,6 +14,7 @@ function selectRadius(button) {
     button.classList.add('selected');
     updateSumma();
 }
+
 
 // Функция обновления значения срока хранения
 function updateSrokValue() {
