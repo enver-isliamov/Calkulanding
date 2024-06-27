@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let selectedKol = 4;
     let isDiskEnabled = false;
 
-     // Обработчик для кнопок с переменными Radius
+    // Обработчик для кнопок с переменными Radius
     radiusButtons.forEach(button => {
         button.addEventListener('click', () => {
             selectedRadius = parseInt(button.dataset.radius);
@@ -65,66 +65,64 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('kolValue').textContent = selectedKol;
     }
 
-   // Функция для подсветки активной кнопки и обновления состояний кнопок
+    // Функция для подсветки активной кнопки и обновления состояний кнопок
     function updateButtonStates(selectedButton) {
         radiusButtons.forEach(button => {
             const radiusValue = parseInt(button.dataset.radius);
             const isActive = button === selectedButton;
             button.classList.toggle('active', isActive);
-
-            if (isActive) {
-                selectedButtonLabel = button.textContent.trim();
-            }
         });
     }
-    
-//////////////////////////////////////////////////////////////////////
-    
+
     // Функция для отправки заявки
     async function sendOrder() {
-        // Проверяем, указан ли номер телефона
-        if (!phoneInput.value.trim()) {
-            alert('Пожалуйста, укажите номер телефона!');
-            return; // Прекращаем выполнение функции, если номер телефона не указан
+        // Проверяем, указаны ли необходимые данные
+        if (!phoneInput.value.trim() || !nameInput.value.trim()) {
+            alert('Пожалуйста, заполните все обязательные поля (имя и номер телефона)!');
+            return;
         }
 
-        const orderDetails = `
-        📌 НОВАЯ ЗАЯВКА
-        
+        // Формируем текст заявки
+        const orderDetails = `............................................
             Имя: ${nameInput.value}
             Телефон: ${phoneInput.value}
             ● Дата встречи: ${dateInput.value} 👈
             Адрес вывоза: ${addressInput.value}
-            
-● Колёса: ${selectedButtonLabel}  ➽  ${selectedKol}шт.  ➽  ${isDiskEnabled ? 'С дисками' : 'Без дисков'} 
+            ● Колёса: ${selectedRadius} ➽ ${selectedKol}шт. ➽ ${isDiskEnabled ? 'С дисками' : 'Без дисков'}
             ● Срок хранения: ${selectedSrok}мес.
             ............................................
         `;
 
-        // Ваш токен бота и ID чата получателя
-        const botToken = '6473374979:AAH8OHCxWN2kO0ep9wrbLXolk2ys4__GLqg';
-        const chatId = '96609347';
+ // Ваш токен бота и ID чата получателя
+    const botToken = '6473374979:AAH8OHCxWN2kO0ep9wrbLXolk2ys4__GLqg';
+    const chatId = '96609347';
 
         // Формируем URL для отправки сообщения через API Телеграма
-        const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        const telegramApiParams = {
+    const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    
+    try {
+        // Отправляем запрос к API Telegram для получения информации о текущем чате (для отправки сообщения обратно)
+        const response = await axios.get(`https://api.telegram.org/bot${botToken}/getChat?chat_id=${chatId}`);
+        const userId = response.data.result.id;
+
+        // Отправляем сообщение в общий чат
+        const commonTelegramApiParams = {
             chat_id: chatId,
-            text: orderDetails,
+            text: `📌 НОВАЯ ЗАЯВКА\n\n${orderDetails}`
         };
+        await axios.post(telegramApiUrl, commonTelegramApiParams);
 
-        try {
-try {
-    // Отправляем запрос к API Телеграма
-    await axios.post(telegramApiUrl, telegramApiParams);
-} catch (error) {
-    console.error('Ошибка при отправке заявки:', error);
-}
+        // Отправляем сообщение обратно пользователю
+        const userTelegramApiParams = {
+            chat_id: userId,
+            text: `✅Ваша заявка отправлена!
+  ● ⚡Ожидайте звонка от менеджера⚡\n\n${orderDetails}`,
+        };
+        await axios.post(telegramApiUrl, userTelegramApiParams);
 
-            // Опционально: обновляем UI или выводим сообщение об успешной отправке
-            console.log('Заявка успешно отправлена в Телеграм!');
-        } catch (error) {
-            // Обработка ошибок, например, вывод в консоль
-            console.error('Ошибка при отправке заявки в Телеграм:', error);
-        }
+        console.log('✅Заявка успешно отправлена в Телеграм!');
+    } catch (error) {
+        console.error('❌Ошибка при отправке заявки в Телеграм:', error);
     }
+}
 });
