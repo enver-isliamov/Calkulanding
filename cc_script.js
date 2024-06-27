@@ -97,24 +97,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const botToken = '6473374979:AAH8OHCxWN2kO0ep9wrbLXolk2ys4__GLqg';
     const chatId = '96609347';
 
-        // Формируем URL для отправки сообщения через API Телеграма
-    const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    
-    try {
-        // Отправляем запрос к API Telegram для получения информации о текущем чате (для отправки сообщения обратно)
-        const response = await axios.get(`https://api.telegram.org/bot${botToken}/getChat?chat_id=${chatId}`);
-        const userId = response.data.result.id;
+       const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-        // Отправляем сообщение в общий чат
+    try {
+        // Отправляем сообщение в общий чат (администратору)
         const commonTelegramApiParams = {
             chat_id: chatId,
             text: `📌 НОВАЯ ЗАЯВКА\n\n${orderDetails}`
         };
         await axios.post(telegramApiUrl, commonTelegramApiParams);
 
-        // Отправляем сообщение обратно пользователю
+        // Отправляем сообщение пользователю
         const userTelegramApiParams = {
-            chat_id: userId,
+            chat_id: userId, // userId - это уникальный идентификатор пользователя Telegram
             text: `✅Ваша заявка отправлена!
   ● ⚡Ожидайте звонка от менеджера⚡\n\n${orderDetails}`,
         };
@@ -125,4 +120,3 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('❌Ошибка при отправке заявки в Телеграм:', error);
     }
 }
-});
